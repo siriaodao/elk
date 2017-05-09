@@ -20,4 +20,8 @@ config目录下配置按自己需求更改
 
 创建应用数据挂载目录: mkdir -p /opt/elk/data/elk/{elasticsearchdata,filebeatdata,kibanadata,logstashdata}
 
-docker-compose up -d  # 不进行编译启动容器 docker-compose -f docker-compose-registry.yml up -d
+docker-compose up -d  
+
+PS:使用已有的镜像运行容器
+
+docker-compose -f docker-compose-registry.yml up -d
