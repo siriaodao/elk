@@ -10,7 +10,7 @@ RUN curl -fsSL ${LOGSTASH_URL} -o /opt/product/logstash.tar.gz \
 RUN mkdir -p /opt/product/config \
   && ln -snf /opt/product/config/logstash.yml /opt/product/logstash/config/logstash.yml \
   && ln -snf /opt/product/config/logstash.conf /opt/product/logstash/config/logstash.conf
-ADD ./script/logstash.sh /root/
+ADD ./bin/logstash.sh /root/
 RUN chmod +x /root/logstash.sh
 EXPOSE 5044
 EXPOSE 4560

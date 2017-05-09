@@ -9,7 +9,7 @@ RUN curl -fsSL ${FILEBEAT_URL} -o /opt/product/filebeat.tar.gz \
   && /bin/mv /opt/product/filebeat-${FILEBEAT_VERSION}-linux-x86_64 /opt/product/filebeat
 RUN mkdir -p /opt/product/config \
   && ln -snf /opt/product/config/filebeat.yml /opt/product/filebeat/filebeat.yml
-ADD ./script/filebeat.sh /root/
+ADD ./bin/filebeat.sh /root/
 RUN chmod +x /root/filebeat.sh
 ENTRYPOINT ["/root/filebeat.sh"]
 CMD ["/usr/sbin/init"]

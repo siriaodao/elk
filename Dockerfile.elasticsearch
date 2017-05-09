@@ -10,7 +10,7 @@ RUN curl -fsSL ${ELASTICSEARCH_URL} -o /opt/product/elasticsearch.tar.gz \
 RUN mkdir -p /opt/product/config \
   && ln -snf /opt/product/config/elasticsearch.yml /opt/product/elasticsearch/config/elasticsearch.yml
 RUN useradd elk && chown -R elk:elk /opt/product/elasticsearch
-ADD ./script/elasticsearch.sh /root/
+ADD ./bin/elasticsearch.sh /root/
 RUN chmod +x /root/elasticsearch.sh
 EXPOSE 9200
 EXPOSE 9300

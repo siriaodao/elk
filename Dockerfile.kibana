@@ -9,7 +9,7 @@ RUN curl -fsSL ${KIBANA_URL} -o /opt/product/kibana.tar.gz \
   && /bin/mv /opt/product/kibana-${KIBANA_VERSION}-linux-x86_64 /opt/product/kibana
 RUN mkdir -p /opt/product/config \
   && ln -snf /opt/product/config/kibana.yml /opt/product/kibana/config/kibana.yml
-ADD ./script/kibana.sh /root/
+ADD ./bin/kibana.sh /root/
 RUN chmod +x /root/kibana.sh
 EXPOSE 5601
 ENTRYPOINT ["/root/kibana.sh"]
