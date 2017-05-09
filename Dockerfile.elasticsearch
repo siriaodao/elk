@@ -1,0 +1,18 @@
+FROM elkbbase:jdk-8 
+MAINTAINER qinglong siriaodao@vip.qq.com
+VOLUME [ "/opt/product/data/" ]
+ARG ELASTICSEARCH_VERSION
+ENV ELASTICSEARCH_VERSION ${ELASTICSEARCH_VERSION:-5.3.0}
+ARG ELASTICSEARCH_URL=https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ELASTICSEARCH_VERSION}.tar.gz
+RUN curl -fsSL ${ELASTICSEARCH_URL} -o /opt/product/elasticsearch.tar.gz \
+  && tar zxf /opt/product/elasticsearch.tar.gz -C /opt/product \
+  && /bin/mv /opt/product/elasticsearch-${ELASTICSEARCH_VERSION} /opt/product/elasticsearch
+RUN mkdir -p /opt/product/config \
+  && ln -snf /opt/product/config/elasticsearch.yml /opt/product/elasticsearch/config/elasticsearch.yml
+RUN useradd elk && chown -R elk:elk /opt/product/elasticsearch
+ADD ./script/elasticsearch.sh /root/
+RUN chmod +x /root/elasticsearch.sh
+EXPOSE 9200
+EXPOSE 9300
+ENTRYPOINT ["/root/elasticsearch.sh"]
+CMD ["/usr/sbin/init"]

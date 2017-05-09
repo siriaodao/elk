@@ -1,0 +1,44 @@
+version: '2.1'
+services:
+  filebeat:
+    image: filebeat:5.3.0
+    hostname: filebeat
+    restart: always
+    volumes:
+    - /var/log:/var/log
+    - /opt/elk/config/filebeat:/opt/product/config
+    - /opt/elk/data:/opt/product/data 
+
+  logstash:
+    image: logstash:5.3.0 
+    hostname: logstash
+    restart: always
+    ports:
+    - 5044:5044
+    - 4560:4560
+    - 18080:8080
+    volumes:
+    - /opt/elk/config/logstash:/opt/product/config
+    - /opt/elk/data:/opt/product/data 
+
+  elasticsearch:
+    image: elasticsearch:5.3.0
+    hostname: elasticsearch
+    restart: always
+    privileged: true
+    ports:
+    - 9200:9200
+    - 9300:9300
+    volumes:
+    - /opt/elk/config/elasticsearch:/opt/product/config
+    - /opt/elk/data:/opt/product/data 
+
+  kibana:
+    image: kibana:5.3.0 
+    hostname: kibana
+    restart: always
+    ports:
+    - 5601:5601 
+    volumes:
+    - /opt/elk/config/kibana:/opt/product/config
+    - /opt/elk/data:/opt/product/data 

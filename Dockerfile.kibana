@@ -1,0 +1,16 @@
+FROM elkbbase:jdk-8
+MAINTAINER qinglong siriaodao@vip.qq.com
+VOLUME [ "/opt/product/data/" ]
+ARG KIBANA_VERSION
+ENV KIBANA_VERSION ${KIBANA_VERSION:-5.3.0}
+ARG KIBANA_URL=https://artifacts.elastic.co/downloads/kibana/kibana-${KIBANA_VERSION}-linux-x86_64.tar.gz
+RUN curl -fsSL ${KIBANA_URL} -o /opt/product/kibana.tar.gz \
+  && tar zxf /opt/product/kibana.tar.gz -C /opt/product \
+  && /bin/mv /opt/product/kibana-${KIBANA_VERSION}-linux-x86_64 /opt/product/kibana
+RUN mkdir -p /opt/product/config \
+  && ln -snf /opt/product/config/kibana.yml /opt/product/kibana/config/kibana.yml
+ADD ./script/kibana.sh /root/
+RUN chmod +x /root/kibana.sh
+EXPOSE 5601
+ENTRYPOINT ["/root/kibana.sh"]
+CMD ["/usr/sbin/init"]

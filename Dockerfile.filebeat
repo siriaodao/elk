@@ -1,0 +1,15 @@
+FROM elkbbase:jdk-8 
+MAINTAINER qinglong siriaodao@vip.qq.com
+VOLUME [ "/opt/product/data/" ]
+ARG FILEBEAT_VERSION
+ENV FILEBEAT_VERSION ${FILEBEAT_VERSION:-5.3.0}
+ARG FILEBEAT_URL=https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${FILEBEAT_VERSION}-linux-x86_64.tar.gz
+RUN curl -fsSL ${FILEBEAT_URL} -o /opt/product/filebeat.tar.gz \
+  && tar zxf /opt/product/filebeat.tar.gz -C /opt/product \
+  && /bin/mv /opt/product/filebeat-${FILEBEAT_VERSION}-linux-x86_64 /opt/product/filebeat
+RUN mkdir -p /opt/product/config \
+  && ln -snf /opt/product/config/filebeat.yml /opt/product/filebeat/filebeat.yml
+ADD ./script/filebeat.sh /root/
+RUN chmod +x /root/filebeat.sh
+ENTRYPOINT ["/root/filebeat.sh"]
+CMD ["/usr/sbin/init"]
