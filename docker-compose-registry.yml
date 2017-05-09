@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   filebeat:
-    image: filebeat:5.3.0
+    image: registry.cn-qingdao.aliyuncs.com/icommon/filebeat:5.3.0
     hostname: filebeat
     restart: always
     volumes:
@@ -10,7 +10,7 @@ services:
     - /opt/elk/data:/opt/product/data 
 
   logstash:
-    image: logstash:5.3.0
+    image: registry.cn-qingdao.aliyuncs.com/icommon/logstash:5.3.0
     hostname: logstash
     restart: always
     ports:
@@ -22,7 +22,7 @@ services:
     - /opt/elk/data:/opt/product/data 
 
   elasticsearch:
-    image: elasticsearch:5.3.0
+    image: registry.cn-qingdao.aliyuncs.com/icommon/elasticsearch:5.3.0
     hostname: elasticsearch
     restart: always
     privileged: true
@@ -34,7 +34,7 @@ services:
     - /opt/elk/data:/opt/product/data 
 
   kibana:
-    image: kibana:5.3.0
+    image: registry.cn-qingdao.aliyuncs.com/icommon/kibana:5.3.0
     hostname: kibana
     restart: always
     ports:
