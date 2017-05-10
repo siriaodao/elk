@@ -1,0 +1,37 @@
+input {
+    beats{
+        port => 5044
+        codec => json     # 直接将filebeat保存在message中的json字串解析出来
+    }
+}
+filter {
+    if("ERROR" in [level]){
+        alter {
+           add_field => {"sendmail" => "true"}
+        }
+    }
+    mutate {
+        split => { "source" => "/" }
+        add_field => {"file_name" => "%{[source][-1]}"}
+    }
+
+}
+
+output {
+
+    if ([sendmail] == "true"){
+          exec {
+                command => "/bin/bash /usr/local/logstash/scripts/mail.sh %{file_name}-%{+YYYY.MM.dd} %{message}"
+         }
+    }
+
+    elasticsearch {
+    hosts => "192.168.50.83:9200"
+    manage_template => false
+    index => "%{file_name}-%{+YYYY.MM.dd}"
+  }
+    file {
+    path => "/data/elkdafta/%{file_name}-%{+YYYY.MM.dd}"
+    codec => json
+   }
+}
