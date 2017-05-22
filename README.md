@@ -18,7 +18,7 @@ bash build.sh
 
 config目录下配置按自己需求更改
 
-创建应用数据挂载目录: mkdir -p /opt/elk/data/elk/{elasticsearchdata,filebeatdata,kibanadata,logstashdata}
+创建应用数据挂载目录: mkdir -p /opt/elk/data/elk/{elasticsearchdata,filebeatdata,kibanadata,logstashdata,zookeeperdata}
 
 docker-compose up -d  
 
