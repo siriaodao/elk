@@ -5,30 +5,67 @@ services:
     hostname: filebeat
     restart: always
     volumes:
-    - /var/log:/var/log
+    - /var/log/fms:/var/log
     - /opt/elk/config/filebeat:/opt/product/config
     - /opt/elk/data/elk/filebeatdata:/opt/product/data/elk/filebeatdata
 
-  logstash:
+  logstash_in:
     image: logstash:5.3.0
-    hostname: logstash
+    hostname: logstash_in
     restart: always
-    ports:
-    - 5044:5044
-    - 4560:4560
-    - 18080:8080
     volumes:
-    - /opt/elk/config/logstash:/opt/product/config
-    - /opt/elk/data/elk/logstashdata:/opt/product/data/elk/logstashdata
+    - /opt/elk/config/logstash/in_filebeat:/opt/product/config
+    - /opt/elk/data/elk/logstashdata/in_filebeat:/opt/product/data/elk/logstashdata
+  
+  zk1:
+    image: zookeeper:3.4.9 
+    hostname: zk1
+    restart: always
+    volumes:
+    - /opt/elk/data/elk/zookeeperdata:/opt/product/data/elk/zookeeperdata
+    environment:
+      ZK_ID: 1
+      ZK_NODE_LIST: server.1=zk1:3181:4181 server.2=zk2:3181:4181
+
+  zk2:
+    image: zookeeper:3.4.9
+    hostname: zk2
+    restart: always
+    environment:
+      ZK_ID: 2
+      ZK_NODE_LIST: server.1=zk1:3181:4181 server.2=zk2:3181:4181
+
+  kafka1:
+    image: kafka:2.12
+    hostname: kafka1
+    restart: always
+    volumes:
+    - /opt/elk/data/elk/kafkadata:/opt/product/data/elk/kafkadata
+    environment:
+      KAFKA_ID: 1
+      ZK_CLUSTER: zk1:2181,zk2:2181
+
+  kafka2:
+    image: kafka:2.12
+    hostname: kafka2
+    restart: always
+    environment:
+      KAFKA_ID: 2
+      ZK_CLUSTER: zk1:2181,zk2:2181
+
+  logstash_to:
+    image: logstash:5.3.0
+    hostname: logstash_to
+    restart: always
+    volumes:
+    - /opt/elk/config/logstash/to_elasticsearch:/opt/product/config
+    - /opt/elk/data/elk/logstashdata/to_elasticsearch:/opt/product/data/elk/logstashdata
 
   elasticsearch:
     image: elasticsearch:5.3.0
     hostname: elasticsearch
     restart: always
     privileged: true
-    ports:
-    - 9200:9200
-    - 9300:9300
     volumes:
     - /opt/elk/config/elasticsearch:/opt/product/config
     - /opt/elk/data/elk/elasticsearchdata:/opt/product/data/elk/elasticsearchdata

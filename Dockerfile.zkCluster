@@ -1,4 +1,4 @@
-FROM elkbbase:jdk-8
+FROM elkbase:jdk-8
 MAINTAINER qinglong "siriaodao@vip.com"
 VOLUME ["/opt/product/data/"]
 ENV ZOOKEEPER_VERSION 3.4.9

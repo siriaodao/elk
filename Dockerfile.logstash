@@ -1,4 +1,4 @@
-FROM elkbbase:jdk-8
+FROM elkbase:jdk-8
 MAINTAINER qinglong siriaodao@vip.qq.com
 VOLUME [ "/opt/product/data/" ]
 ARG LOGSTASH_VERSION
@@ -8,7 +8,6 @@ RUN curl -fsSL ${LOGSTASH_URL} -o /opt/product/logstash.tar.gz \
   && tar zxf /opt/product/logstash.tar.gz -C /opt/product \
   && /bin/mv /opt/product/logstash-${LOGSTASH_VERSION} /opt/product/logstash
 RUN mkdir -p /opt/product/config \
-  && ln -snf /opt/product/config/logstash.yml /opt/product/logstash/config/logstash.yml \
   && ln -snf /opt/product/config/logstash.conf /opt/product/logstash/config/logstash.conf
 ADD ./bin/logstash.sh /root/
 RUN chmod +x /root/logstash.sh
