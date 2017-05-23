@@ -36,4 +36,22 @@ elasticsearch
 
 kafka
 
+/opt/product/kafka/bin/kafka-topics.sh --create --zookeeper zk1:2181 --replication-factor 1 --partitions 2 --topic ecplogs
+
+/opt/product/kafka/bin/kafka-console-consumer.sh --zookeeper zk1:2181 --topic ecplogs --from-beginning
+
+/opt/product/kafka/bin/kafka-console-producer.sh --broker-list kafka1:9092 --topic ecplogs
+
 zookeeper
+
+/opt/product/zookeeper/bin/zkServer.sh status
+
+/opt/product/zookeeper/bin/zkCli.sh -server zk1:2181
+
+create /test test_zk
+
+/opt/product/zookeeper/bin/zkCli.sh -server zk1:2181
+
+get /test
+
+delete /test
