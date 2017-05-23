@@ -1,0 +1,21 @@
+version: '2.1'
+services:
+  es1:
+    image: elasticsearch:5.3.0-cluster
+    hostname: es1
+    restart: always
+    volumes:
+    - /opt/elk/test/elasticsearchdata:/opt/product/data/elk/elasticsearchdata
+    environment:
+      ES_CLUSTER_NAME: my-cluster
+      ES_NODE_NAME: es1
+      ES_NODE_LIST: es1,es2 
+
+  es2:
+    image: elasticsearch:5.3.0-cluster
+    hostname: es2
+    restart: always
+    environment:
+      ES_CLUSTER_NAME: my-cluster
+      ES_NODE_NAME: es2
+      ES_NODE_LIST: es1,es2

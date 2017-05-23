@@ -1,9 +1,9 @@
-FROM registry.cn-qingdao.aliyuncs.com/icommon/centos
+FROM registry.cn-qingdao.aliyuncs.com/icommon/centos7:latest
 MAINTAINER qinglong <siriaodao@vip.qq.com>
 VOLUME [ "/opt/product/data/" ]
-RUN  /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-RUN /bin/echo -e "ZONE="Asia/Shanghai"\nUTC=false\nRTC=false" > /etc/sysconfig/clock
-RUN mkdir /opt/product/tools/
-ADD ./tools /opt/product/tools/
+RUN  /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+  && /bin/echo -e "ZONE="Asia/Shanghai"\nUTC=false\nRTC=false" > /etc/sysconfig/clock \
+  &&  mkdir -p /opt/product/tools
+ADD ./tools/jdk1.8.0_121.tar.gz /opt/product/tools/
 ENV JAVA_HOME /opt/product/tools/jdk1.8.0_121
 CMD ["/usr/sbin/init"]

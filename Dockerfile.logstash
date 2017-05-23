@@ -5,11 +5,14 @@ ARG LOGSTASH_VERSION
 ENV LOGSTASH_VERSION ${LOGSTASH_VERSION:-5.3.0}
 ARG LOGSTASH_URL=https://artifacts.elastic.co/downloads/logstash/logstash-${LOGSTASH_VERSION}.tar.gz
 RUN curl -fsSL ${LOGSTASH_URL} -o /opt/product/logstash.tar.gz \
-  && tar zxf /opt/product/logstash.tar.gz -C /opt/product \
-  && /bin/mv /opt/product/logstash-${LOGSTASH_VERSION} /opt/product/logstash
-RUN mkdir -p /opt/product/config \
-  && ln -snf /opt/product/config/logstash.conf /opt/product/logstash/config/logstash.conf
-ADD ./bin/logstash.sh /root/
+  && cd /opt/product \
+  && tar zxf logstash.tar.gz  \
+  && /bin/mv logstash-${LOGSTASH_VERSION} logstash \
+  && ./logstash/bin/logstash-plugin install logstash-filter-multiline \
+  && ./logstash/bin/logstash-plugin install logstash-filter-de_dot \
+  && mkdir -p config \
+  && ln -snf ./config/logstash.conf ./logstash/config/logstash.conf
+COPY ./bin/logstash.sh /root/
 RUN chmod +x /root/logstash.sh
 EXPOSE 5044
 EXPOSE 4560

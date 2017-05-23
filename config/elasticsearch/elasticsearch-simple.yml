@@ -1,0 +1,14 @@
+luster.name: elk-ES
+node.name: loges-A
+network.host: 0.0.0.0
+http.port: 9200
+#discovery.zen.minimum_master_nodes: 2
+#bootstrap.memory_lock: true
+discovery.type: single-node
+path.data: /data/elk/elasticsearch-5.4.0/data
+path.logs: /data/elk/elasticsearch-5.4.0/logs
+ http.cors.enabled: true 
+http.cors.allow-origin: "*"
+node.master: true
+node.data: true
+discovery.zen.ping.unicast.hosts: ["192.168.6.110"]
