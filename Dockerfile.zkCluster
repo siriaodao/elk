@@ -5,7 +5,7 @@ ENV ZOOKEEPER_VERSION 3.4.9
 RUN curl -fsSL http://mirror.bit.edu.cn/apache/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/zookeeper-${ZOOKEEPER_VERSION}.tar.gz -o /opt/product/zookeeper.tar.gz \
   && cd /opt/product \
   && tar zxf zookeeper.tar.gz && rm -rf zookeeper.tar.gz \
-  && mv zookeeper-${ZOOKEEPER_VERSION} zookeeper 
+  && mv zookeeper-${ZOOKEEPER_VERSION} zookeeper \
 ADD ./bin/zookeeper.sh /root
 RUN chmod +x /root/zookeeper.sh
 ENTRYPOINT ["/root/zookeeper.sh"]

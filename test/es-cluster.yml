@@ -1,10 +1,12 @@
 version: '2.1'
 services:
   es1:
-    image: elasticsearch:5.3.0-cluster
+    image: elasticsearch:5.3.0
     hostname: es1
     restart: always
+    privileged: true
     volumes:
+    - /opt/elk/config/elasticsearch:/opt/product/config
     - /opt/elk/test/elasticsearchdata:/opt/product/data/elk/elasticsearchdata
     environment:
       ES_CLUSTER_NAME: my-cluster
@@ -13,9 +15,12 @@ services:
       ES_NODE_NUMBER: 1
 
   es2:
-    image: elasticsearch:5.3.0-cluster
+    image: elasticsearch:5.3.0
     hostname: es2
     restart: always
+    privileged: true
+    volumes:
+    - /opt/elk/config/elasticsearch:/opt/product/config
     environment:
       ES_CLUSTER_NAME: my-cluster
       ES_NODE_NAME: es2
