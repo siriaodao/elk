@@ -20,7 +20,7 @@ config目录下配置按自己需求更改
 
 docker-compose up -d  
 
-PS:使用已有的镜像运行容器
+使用已有的镜像运行容器
 
 docker-compose -f docker-compose-registry.yml up -d
 
@@ -40,12 +40,21 @@ docker-compose -f docker-compose-registry.yml up -d
 ---kafka
 
 
-/opt/product/kafka/bin/kafka-topics.sh --create --zookeeper zk1:2181 --replication-factor 1 --partitions 2 --topic ecplogs
+/opt/product/kafka/bin/kafka-topics.sh --create --zookeeper zk1:2181,zk2:2181,zk3:2181 --replication-factor 2 --partitions 3 --topic test
 
-/opt/product/kafka/bin/kafka-console-consumer.sh --zookeeper zk1:2181 --topic ecplogs --from-beginning
+/opt/product/kafka/bin/kafka-topics.sh --list --zookeeper zk1:2181,zk2:2181,zk3:2181
 
-/opt/product/kafka/bin/kafka-console-producer.sh --broker-list kafka1:9092 --topic ecplogs
+/opt/product/kafka/bin/kafka-topics.sh --zookeeper zk1:2181,zk2:2181,zk3:2181 --describe --topic  test
 
+/opt/product/kafka/bin/kafka-topics.sh --zookeeper zk1:2181,zk2:2181,zk3:2181 --alter --partitions 5 --topic test
+
+/opt/product/kafka/bin/kafka-console-producer.sh --broker-list kafka1:9092,kafka2:9092,kafka3:9092 --topic test
+
+/opt/product/kafka/bin/kafka-console-consumer.sh --zookeeper zk1:2181,zk2:2181,zk3:2181 --topic test --from-beginning
+
+/opt/product/kafka/bin/kafka-topics.sh --delete --zookeeper zk1:2181,zk2:2181,zk3:2181 --topic test
+
+/opt/product/kafka/bin/kafka-topics.sh --create --zookeeper zk1:2181,zk2:2181,zk3:2181 --replication-factor 2 --partitions 3 --topic ecplogs
 
 ---zookeeper
 
@@ -56,7 +65,7 @@ docker-compose -f docker-compose-registry.yml up -d
 
 create /test test_zk
 
-/opt/product/zookeeper/bin/zkCli.sh -server zk1:2181
+/opt/product/zookeeper/bin/zkCli.sh -server zk2:2181
 
 get /test
 

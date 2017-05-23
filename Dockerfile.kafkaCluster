@@ -1,11 +1,12 @@
 FROM elkbase:jdk-8
 MAINTAINER qinglong "siriaodao@vip.com"
 VOLUME ["/opt/product/data/"]
-ENV KAFKA_VERSION 0.10.2.1
-RUN curl -fsSL http://mirror.bit.edu.cn/apache/kafka/${KAFKA_VERSION}/kafka_2.12-${KAFKA_VERSION}.tgz -o /opt/product/kafka.tgz \
+ENV KAFKA_VERSION 0.10.0.1
+RUN curl -fsSL http://mirror.bit.edu.cn/apache/kafka/${KAFKA_VERSION}/kafka_2.11-${KAFKA_VERSION}.tgz -o /opt/product/kafka.tgz \
   && cd /opt/product \
   && tar zxf kafka.tgz && rm -rf kafka.tgz \
-  && mv kafka_2.12-${KAFKA_VERSION} kafka
+  && mv kafka_2.11-${KAFKA_VERSION} kafka \
+  && mkdir config
 COPY ./bin/kafka.sh /root
 RUN chmod +x /root/kafka.sh
 ENTRYPOINT ["/root/kafka.sh"]

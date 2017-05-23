@@ -1,10 +1,10 @@
 #!/bin/bash
 ZK_HOME="/opt/product/zookeeper"
-ZK_CONF="${ZK_HOME}/conf/zoo.cfg"
 ZK_DATA="/opt/product/data/elk/zookeeperdata"
-ZK_LOG_DIR="/var/log/zookeeper"
-ZK_CONF_TXT="tickTime=2000\ninitLimit=10\nsyncLimit=5\ndataDir=${ZK_DATA}\ndatalogDir=${ZK_LOG_DIR}\nclientPort=2181"
-echo -e ${ZK_CONF_TXT} > ${ZK_CONF}
+ZK_LOG="/opt/product/log"
+ZK_CONF="${ZK_HOME}/conf/zoo.cfg"
+ZK_CONF_TXT="tickTime=2000\ninitLimit=10\nsyncLimit=5\ndataDir=${ZK_DATA}\ndatalogDir=${ZK_LOG}\nclientPort=2181"
+echo -e "${ZK_CONF_TXT}" > ${ZK_CONF}
 for i in ${ZK_NODE_LIST[@]}
 do
   echo "$i" >> ${ZK_CONF}
