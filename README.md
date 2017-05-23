@@ -8,7 +8,7 @@ elk官网地址：https://www.elastic.co
 
 git clone https://github.com/siriaodao/elk.git 
 
-下载jdk1.8.0_121.tar.gz 包并解压到 /opt/elk/tools下
+下载jdk1.8.0_121.tar.gz 包并放到 /opt/elk/tools下
 
 -----------编译-----------
 

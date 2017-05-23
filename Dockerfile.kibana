@@ -6,7 +6,7 @@ ENV KIBANA_VERSION ${KIBANA_VERSION:-5.3.0}
 ARG KIBANA_URL=https://artifacts.elastic.co/downloads/kibana/kibana-${KIBANA_VERSION}-linux-x86_64.tar.gz
 RUN curl -fsSL ${KIBANA_URL} -o /opt/product/kibana.tar.gz \
   && cd /opt/product \
-  && tar zxf kibana.tar.gz  \
+  && tar zxf kibana.tar.gz && rm -rf kibana.tar.gz \
   && /bin/mv kibana-${KIBANA_VERSION}-linux-x86_64 kibana \
   && mkdir -p config \
   && ln -snf ./config/kibana.yml ./kibana/config/kibana.yml

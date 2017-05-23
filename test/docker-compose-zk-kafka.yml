@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   zk1:
-    image: zookeeper 
+    image: registry.cn-qingdao.aliyuncs.com/icommon/zookeeper:3.4.9
     hostname: zk1
     restart: always
     volumes:
@@ -11,7 +11,7 @@ services:
       ZK_NODE_LIST: server.1=zk1:3181:4181 server.2=zk2:3181:4181
 
   zk2:
-    image: zookeeper 
+    image: registry.cn-qingdao.aliyuncs.com/icommon/zookeeper:3.4.9
     hostname: zk2
     restart: always
     environment:
@@ -19,7 +19,7 @@ services:
       ZK_NODE_LIST: server.1=zk1:3181:4181 server.2=zk2:3181:4181
 
   kafka1:
-    image: kafka
+    image: registry.cn-qingdao.aliyuncs.com/icommon/kafka:2.12
     hostname: kafka1
     restart: always
     volumes:
@@ -29,7 +29,7 @@ services:
       ZK_CLUSTER: zk1:2181,zk2:2181
 
   kafka2:
-    image: kafka
+    image: registry.cn-qingdao.aliyuncs.com/icommon/kafka:2.12
     hostname: kafka2
     restart: always
     environment:
