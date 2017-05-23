@@ -23,3 +23,17 @@ docker-compose up -d
 PS:使用已有的镜像运行容器
 
 docker-compose -f docker-compose-registry.yml up -d
+
+-----------验证-----------
+
+elasticsearch
+
+集群健康检查： curl 'localhost:9200/_cat/health?v'
+
+查看集群节点： curl 'localhost:9200/_cat/nodes?v'
+
+查看索引： curl 'localhost:9200/_cat/indices?v'
+
+kafka
+
+zookeeper
