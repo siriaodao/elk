@@ -26,7 +26,9 @@ docker-compose -f docker-compose-registry.yml up -d
 
 -----------验证-----------
 
-elasticsearch
+
+---elasticsearch
+
 
 集群健康检查： curl 'localhost:9200/_cat/health?v'
 
@@ -34,7 +36,9 @@ elasticsearch
 
 查看索引： curl 'localhost:9200/_cat/indices?v'
 
-kafka
+
+---kafka
+
 
 /opt/product/kafka/bin/kafka-topics.sh --create --zookeeper zk1:2181 --replication-factor 1 --partitions 2 --topic ecplogs
 
@@ -42,7 +46,9 @@ kafka
 
 /opt/product/kafka/bin/kafka-console-producer.sh --broker-list kafka1:9092 --topic ecplogs
 
-zookeeper
+
+---zookeeper
+
 
 /opt/product/zookeeper/bin/zkServer.sh status
 
