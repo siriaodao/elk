@@ -11,7 +11,7 @@ RUN curl -fsSL ${LOGSTASH_URL} -o /opt/product/logstash.tar.gz \
   && ./logstash/bin/logstash-plugin install logstash-filter-multiline \
   && ./logstash/bin/logstash-plugin install logstash-filter-de_dot \
   && mkdir -p config \
-  && ln -snf ./config/logstash.conf ./logstash/config/logstash.conf
+  && ln -snf /opt/product/config/logstash.conf ./logstash/config/logstash.conf
 COPY ./bin/logstash.sh /root/
 RUN chmod +x /root/logstash.sh
 EXPOSE 5044

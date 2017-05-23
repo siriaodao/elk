@@ -5,4 +5,5 @@ filebeat.prospectors:
 #output.elasticsearch:
 #  hosts: ["192.168.143.134:9200"]
 output.logstash:
-  hosts: ["logstash_in:5044"]
+  hosts: ["logstash:5044"]
+  #hosts: ["logstash_in:5044"]

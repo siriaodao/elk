@@ -9,7 +9,7 @@ RUN curl -fsSL ${KIBANA_URL} -o /opt/product/kibana.tar.gz \
   && tar zxf kibana.tar.gz && rm -rf kibana.tar.gz \
   && /bin/mv kibana-${KIBANA_VERSION}-linux-x86_64 kibana \
   && mkdir -p config \
-  && ln -snf ./config/kibana.yml ./kibana/config/kibana.yml
+  && ln -snf /opt/product/config/kibana.yml ./kibana/config/kibana.yml
 COPY ./bin/kibana.sh /root/
 RUN chmod +x /root/kibana.sh
 EXPOSE 5601

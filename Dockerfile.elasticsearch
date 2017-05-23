@@ -9,8 +9,8 @@ RUN curl -fsSL ${ELASTICSEARCH_URL} -o /opt/product/elasticsearch.tar.gz \
   && tar zxf elasticsearch.tar.gz && rm -rf elasticsearch.tar.gz \
   && /bin/mv elasticsearch-${ELASTICSEARCH_VERSION} elasticsearch \
   && mkdir config \
-  && ln -snf ./config/jvm.options ./elasticsearch/config/jvm.options \
-  && ln -snf ./config/log4j2.properties ./elasticsearch/config/log4j2.properties \
+  && ln -snf /opt/product/config/jvm.options ./elasticsearch/config/jvm.options \
+  && ln -snf /opt/product/config/log4j2.properties ./elasticsearch/config/log4j2.properties \
   && useradd elk && chown -R elk:elk /opt/product
 COPY ./bin/elasticsearch.sh /root/
 RUN chmod +x /root/elasticsearch.sh
