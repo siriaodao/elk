@@ -6,7 +6,7 @@ RUN curl -fsSL http://mirror.bit.edu.cn/apache/kafka/${KAFKA_VERSION}/kafka_2.12
   && cd /opt/product \
   && tar zxf kafka.tgz && rm -rf kafka.tgz \
   && mv kafka_2.12-${KAFKA_VERSION} kafka
-ADD ./bin/kafka.sh /root
+COPY ./bin/kafka.sh /root
 RUN chmod +x /root/kafka.sh
 ENTRYPOINT ["/root/kafka.sh"]
 EXPOSE 9092
