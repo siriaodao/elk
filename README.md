@@ -26,9 +26,7 @@ docker-compose -f docker-compose-registry.yml up -d
 
 -----------验证-----------
 
-
 ---elasticsearch
-
 
 集群健康检查： curl 'localhost:9200/_cat/health?v'
 
@@ -36,30 +34,31 @@ docker-compose -f docker-compose-registry.yml up -d
 
 查看索引： curl 'localhost:9200/_cat/indices?v'
 
-
 ---kafka
 
+kafka1:
 
-/opt/product/kafka/bin/kafka-topics.sh --create --zookeeper zk1:2181,zk2:2181,zk3:2181 --replication-factor 2 --partitions 3 --topic test
+创建topic: /opt/product/kafka/bin/kafka-topics.sh --create --zookeeper zk1:2181,zk2:2181,zk3:2181 --replication-factor 2 --partitions 3 --topic test
 
-/opt/product/kafka/bin/kafka-topics.sh --list --zookeeper zk1:2181,zk2:2181,zk3:2181
+列出所有topic: /opt/product/kafka/bin/kafka-topics.sh --list --zookeeper zk1:2181,zk2:2181,zk3:2181
 
-/opt/product/kafka/bin/kafka-topics.sh --zookeeper zk1:2181,zk2:2181,zk3:2181 --describe --topic  test
+查看某topic详细信息: /opt/product/kafka/bin/kafka-topics.sh --zookeeper zk1:2181,zk2:2181,zk3:2181 --describe --topic  test
 
-/opt/product/kafka/bin/kafka-topics.sh --zookeeper zk1:2181,zk2:2181,zk3:2181 --alter --partitions 5 --topic test
+变更topic分区数: /opt/product/kafka/bin/kafka-topics.sh --zookeeper zk1:2181,zk2:2181,zk3:2181 --alter --partitions 5 --topic test
 
-/opt/product/kafka/bin/kafka-console-producer.sh --broker-list kafka1:9092,kafka2:9092,kafka3:9092 --topic test
+生产数据: /opt/product/kafka/bin/kafka-console-producer.sh --broker-list kafka1:9092,kafka2:9092,kafka3:9092 --topic test
 
-/opt/product/kafka/bin/kafka-console-consumer.sh --zookeeper zk1:2181,zk2:2181,zk3:2181 --topic test --from-beginning
+kafka2:
 
-/opt/product/kafka/bin/kafka-topics.sh --delete --zookeeper zk1:2181,zk2:2181,zk3:2181 --topic test
+消费数据: /opt/product/kafka/bin/kafka-console-consumer.sh --zookeeper zk1:2181,zk2:2181,zk3:2181 --topic test --from-beginning
 
-/opt/product/kafka/bin/kafka-topics.sh --create --zookeeper zk1:2181,zk2:2181,zk3:2181 --replication-factor 2 --partitions 3 --topic ecplogs
+删除topic: /opt/product/kafka/bin/kafka-topics.sh --delete --zookeeper zk1:2181,zk2:2181,zk3:2181 --topic test
+
+创建elk架构所使用topic: /opt/product/kafka/bin/kafka-topics.sh --create --zookeeper zk1:2181,zk2:2181,zk3:2181 --replication-factor 2 --partitions 3 --topic ecplogs
 
 ---zookeeper
 
-
-/opt/product/zookeeper/bin/zkServer.sh status
+查看服务状态: /opt/product/zookeeper/bin/zkServer.sh status
 
 /opt/product/zookeeper/bin/zkCli.sh -server zk1:2181
 
