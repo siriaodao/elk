@@ -40,23 +40,21 @@ docker-compose -f docker-compose-registry.yml up -d
 
 kafka1:
 
-创建topic: /opt/product/kafka/bin/kafka-topics.sh --create --zookeeper zk1:2181,zk2:2181,zk3:2181 --replication-factor 2 --partitions 3 --topic test
+创建topic: /opt/product/kafka/bin/kafka-topics.sh --create --zookeeper zk1:2181,zk2:2181,zk3:2181 --replication-factor 2 --partitions 3 --topic ecplogs
 
 列出所有topic: /opt/product/kafka/bin/kafka-topics.sh --list --zookeeper zk1:2181,zk2:2181,zk3:2181
 
-查看某topic详细信息: /opt/product/kafka/bin/kafka-topics.sh --zookeeper zk1:2181,zk2:2181,zk3:2181 --describe --topic  test
+查看某topic详细信息: /opt/product/kafka/bin/kafka-topics.sh --zookeeper zk1:2181,zk2:2181,zk3:2181 --describe --topic  ecplogs
 
-变更topic分区数: /opt/product/kafka/bin/kafka-topics.sh --zookeeper zk1:2181,zk2:2181,zk3:2181 --alter --partitions 5 --topic test
+变更topic分区数: /opt/product/kafka/bin/kafka-topics.sh --zookeeper zk1:2181,zk2:2181,zk3:2181 --alter --partitions 5 --topic ecplogs
 
-生产数据: /opt/product/kafka/bin/kafka-console-producer.sh --broker-list kafka1:9092,kafka2:9092,kafka3:9092 --topic test
+生产数据: /opt/product/kafka/bin/kafka-console-producer.sh --broker-list kafka1:9092,kafka2:9092,kafka3:9092 --topic ecplogs
 
 kafka2:
 
-消费数据: /opt/product/kafka/bin/kafka-console-consumer.sh --zookeeper zk1:2181,zk2:2181,zk3:2181 --topic test --from-beginning
+消费数据: /opt/product/kafka/bin/kafka-console-consumer.sh --zookeeper zk1:2181,zk2:2181,zk3:2181 --topic ecplogs --from-beginning
 
-删除topic: /opt/product/kafka/bin/kafka-topics.sh --delete --zookeeper zk1:2181,zk2:2181,zk3:2181 --topic test
-
-创建elk架构所使用topic: /opt/product/kafka/bin/kafka-topics.sh --create --zookeeper zk1:2181,zk2:2181,zk3:2181 --replication-factor 2 --partitions 3 --topic ecplogs
+删除topic: /opt/product/kafka/bin/kafka-topics.sh --delete --zookeeper zk1:2181,zk2:2181,zk3:2181 --topic ecplogs
 
 ---zookeeper
 
