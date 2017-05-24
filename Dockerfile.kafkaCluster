@@ -6,7 +6,8 @@ RUN curl -fsSL http://mirror.bit.edu.cn/apache/kafka/${KAFKA_VERSION}/kafka_2.11
   && cd /opt/product \
   && tar zxf kafka.tgz && rm -rf kafka.tgz \
   && mv kafka_2.11-${KAFKA_VERSION} kafka \
-  && mkdir config
+  && mkdir config \
+  && ln -snf /opt/product/config/log4j2.properties ./kafka/config/log4j2.properties
 COPY ./bin/kafka.sh /root
 RUN chmod +x /root/kafka.sh
 ENTRYPOINT ["/root/kafka.sh"]

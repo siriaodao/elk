@@ -1,33 +1,35 @@
 version: '2.1'
 services:
   zk1:
-    image: zookeeper:3.4.9
+    image: zookeeper:3.4.9-1
     hostname: zk1
     restart: always
     volumes:
+    - /opt/elk/config/zookeeper:/opt/product/config
     - /opt/elk/data/elk/zookeeperdata:/opt/product/data/elk/zookeeperdata
     environment:
       ZK_ID: 1
-      ZK_NODE_LIST: server.1=zk1:3181:4181 server.2=zk2:3181:4181 server.3=zk3:3181:4181
 
   zk2:
-    image: zookeeper:3.4.9
+    image: zookeeper:3.4.9-1
     hostname: zk2
     restart: always
+    volumes:
+    - /opt/elk/config/zookeeper:/opt/product/config
     environment:
       ZK_ID: 2
-      ZK_NODE_LIST: server.1=zk1:3181:4181 server.2=zk2:3181:4181 server.3=zk3:3181:4181
 
   zk3:
-    image: zookeeper:3.4.9
+    image: zookeeper:3.4.9-1
     hostname: zk3
     restart: always
+    volumes:
+    - /opt/elk/config/zookeeper:/opt/product/config
     environment:
       ZK_ID: 3
-      ZK_NODE_LIST: server.1=zk1:3181:4181 server.2=zk2:3181:4181 server.3=zk3:3181:4181
 
   kafka1:
-    image: kafka:2.11
+    image: kafka:2.11-1
     hostname: kafka1
     restart: always
     volumes:
@@ -38,7 +40,7 @@ services:
       ZK_CLUSTER: zk1:2181,zk2:2181,zk3:2181
 
   kafka2:
-    image: kafka:2.11
+    image: kafka:2.11-1
     hostname: kafka2
     restart: always
     volumes:
@@ -48,7 +50,7 @@ services:
       ZK_CLUSTER: zk1:2181,zk2:2181,zk3:2181
 
   kafka3:
-    image: kafka:2.11
+    image: kafka:2.11-1
     hostname: kafka3
     restart: always
     volumes:

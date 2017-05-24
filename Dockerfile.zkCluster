@@ -6,7 +6,9 @@ RUN curl -fsSL http://mirror.bit.edu.cn/apache/zookeeper/zookeeper-${ZOOKEEPER_V
   && cd /opt/product \
   && tar zxf zookeeper.tar.gz && rm -rf zookeeper.tar.gz \
   && mv zookeeper-${ZOOKEEPER_VERSION} zookeeper \
-  && mkdir log
+  && mkdir log config \
+  && ln -snf /opt/product/config/log4j.properties ./zookeeper/conf/log4j.properties \
+  && ln -snf /opt/product/config/zoo.cfg ./zookeeper/conf/zoo.cfg
 COPY ./bin/zookeeper.sh /root
 RUN chmod +x /root/zookeeper.sh
 ENTRYPOINT ["/root/zookeeper.sh"]
