@@ -46,7 +46,7 @@ services:
       ZK_ID: 3
 
   kafka1:
-    image: registry.cn-qingdao.aliyuncs.com/icommon/kafka:2.11
+    image: registry.cn-qingdao.aliyuncs.com/icommon/kafka:2.11-0.10.0.1
     hostname: kafka1
     restart: always
     volumes:
@@ -57,7 +57,7 @@ services:
       ZK_CLUSTER: zk1:2181,zk2:2181,zk3:2181
 
   kafka2:
-    image: registry.cn-qingdao.aliyuncs.com/icommon/kafka:2.11
+    image: registry.cn-qingdao.aliyuncs.com/icommon/kafka:2.11-0.10.0.1
     hostname: kafka2
     restart: always
     volumes:
@@ -67,7 +67,7 @@ services:
       ZK_CLUSTER: zk1:2181,zk2:2181,zk3:2181
 
   kafka3:
-    image: registry.cn-qingdao.aliyuncs.com/icommon/kafka:2.11
+    image: registry.cn-qingdao.aliyuncs.com/icommon/kafka:2.11-0.10.0.1
     hostname: kafka3
     restart: always
     volumes:
