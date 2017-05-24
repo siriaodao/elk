@@ -54,8 +54,6 @@ kafka2:
 
 消费数据: /opt/product/kafka/bin/kafka-console-consumer.sh --zookeeper zk1:2181,zk2:2181,zk3:2181 --topic ecplogs --from-beginning
 
-删除topic: /opt/product/kafka/bin/kafka-topics.sh --delete --zookeeper zk1:2181,zk2:2181,zk3:2181 --topic ecplogs
-
 ---zookeeper
 
 查看服务状态: /opt/product/zookeeper/bin/zkServer.sh status
