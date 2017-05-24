@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   filebeat:
-    image: filebeat:5.3.0
+    image: registry.cn-qingdao.aliyuncs.com/icommon/filebeat:5.3.0
     hostname: filebeat
     restart: always
     volumes:
@@ -10,7 +10,7 @@ services:
     - /opt/elk/data/elk/filebeatdata:/opt/product/data/elk/filebeatdata
 
   logstash_in:
-    image: logstash:5.3.0
+    image: registry.cn-qingdao.aliyuncs.com/icommon/logstash:5.3.0
     hostname: logstash_in
     restart: always
     volumes:
@@ -18,7 +18,7 @@ services:
     - /opt/elk/data/elk/logstashdata/in_filebeat:/opt/product/data/elk/logstashdata
 
   zk1:
-    image: zookeeper:3.4.9
+    image: registry.cn-qingdao.aliyuncs.com/icommon/zookeeper:3.4.9
     hostname: zk1
     restart: always
     volumes:
@@ -28,7 +28,7 @@ services:
       ZK_ID: 1
 
   zk2:
-    image: zookeeper:3.4.9
+    image: registry.cn-qingdao.aliyuncs.com/icommon/zookeeper:3.4.9
     hostname: zk2
     restart: always
     volumes:
@@ -37,7 +37,7 @@ services:
       ZK_ID: 2
 
   zk3:
-    image: zookeeper:3.4.9
+    image: registry.cn-qingdao.aliyuncs.com/icommon/zookeeper:3.4.9
     hostname: zk3
     restart: always
     volumes:
@@ -46,7 +46,7 @@ services:
       ZK_ID: 3
 
   kafka1:
-    image: kafka:2.11
+    image: registry.cn-qingdao.aliyuncs.com/icommon/kafka:2.11
     hostname: kafka1
     restart: always
     volumes:
@@ -57,7 +57,7 @@ services:
       ZK_CLUSTER: zk1:2181,zk2:2181,zk3:2181
 
   kafka2:
-    image: kafka:2.11
+    image: registry.cn-qingdao.aliyuncs.com/icommon/kafka:2.11
     hostname: kafka2
     restart: always
     volumes:
@@ -67,7 +67,7 @@ services:
       ZK_CLUSTER: zk1:2181,zk2:2181,zk3:2181
 
   kafka3:
-    image: kafka:2.11
+    image: registry.cn-qingdao.aliyuncs.com/icommon/kafka:2.11
     hostname: kafka3
     restart: always
     volumes:
@@ -77,7 +77,7 @@ services:
       ZK_CLUSTER: zk1:2181,zk2:2181,zk3:2181
 
   logstash_to:
-    image: logstash:5.3.0
+    image: registry.cn-qingdao.aliyuncs.com/icommon/logstash:5.3.0
     hostname: logstash_to
     restart: always
     volumes:
@@ -85,7 +85,7 @@ services:
     - /opt/elk/data/elk/logstashdata/to_elasticsearch:/opt/product/data/elk/logstashdata
 
   elasticsearch:
-    image: elasticsearch:5.3.0
+    image: registry.cn-qingdao.aliyuncs.com/icommon/elasticsearch:5.3.0
     hostname: elasticsearch
     restart: always
     privileged: true
@@ -94,7 +94,7 @@ services:
     - /opt/elk/data/elk/elasticsearchdata:/opt/product/data/elk/elasticsearchdata
 
   kibana:
-    image: kibana:5.3.0
+    image: registry.cn-qingdao.aliyuncs.com/icommon/kibana:5.3.0
     hostname: kibana
     restart: always
     ports:

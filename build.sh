@@ -1,4 +1,3 @@
-mkdir -p /opt/elk/data/elk/{elasticsearchdata,filebeatdata,kibanadata,logstashdata/in_filebeat,logstashdata/to_elasticsearch,zookeeperdata,kafkadata}
 docker build -f Dockerfile.base -t elkbase:jdk-8 ./
 docker build -f Dockerfile.filebeat -t filebeat:5.3.0 ./
 docker build -f Dockerfile.logstash -t logstash:5.3.0 ./

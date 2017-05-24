@@ -18,6 +18,8 @@ bash build.sh
 
 config目录下配置按自己需求更改
 
+bash create_datadir.sh
+
 docker-compose up -d  
 
 使用已有的镜像运行容器
