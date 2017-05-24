@@ -26,6 +26,8 @@ docker-compose up -d
 
 docker-compose -f docker-compose-registry.yml up -d
 
+^_^ 如服务器配置不好，建议拆分实例，多台服务器运行
+
 -----------验证-----------
 
 ---elasticsearch
