@@ -42,7 +42,7 @@ kafka1:
 
 创建topic: 
 
-/opt/product/kafka/bin/kafka-topics.sh --create --zookeeper zk1:2181,zk2:2181,zk3:2181 --replication-factor 2 --partitions 3 --topic ecplogs
+/opt/product/kafka/bin/kafka-topics.sh --create --zookeeper zk1:2181,zk2:2181,zk3:2181 --replication-factor 2 --partitions 3 --topic test
 
 列出所有topic: 
 
@@ -50,21 +50,25 @@ kafka1:
 
 查看某topic详细信息: 
 
-/opt/product/kafka/bin/kafka-topics.sh --zookeeper zk1:2181,zk2:2181,zk3:2181 --describe --topic  ecplogs
+/opt/product/kafka/bin/kafka-topics.sh --zookeeper zk1:2181,zk2:2181,zk3:2181 --describe --topic test
 
 变更topic分区数: 
 
-/opt/product/kafka/bin/kafka-topics.sh --zookeeper zk1:2181,zk2:2181,zk3:2181 --alter --partitions 5 --topic ecplogs
+/opt/product/kafka/bin/kafka-topics.sh --zookeeper zk1:2181,zk2:2181,zk3:2181 --alter --partitions 5 --topic test
 
 生产数据: 
 
-/opt/product/kafka/bin/kafka-console-producer.sh --broker-list kafka1:9092,kafka2:9092,kafka3:9092 --topic ecplogs
+/opt/product/kafka/bin/kafka-console-producer.sh --broker-list kafka1:9092,kafka2:9092,kafka3:9092 --topic test
 
 kafka2:
 
 消费数据: 
 
-/opt/product/kafka/bin/kafka-console-consumer.sh --zookeeper zk1:2181,zk2:2181,zk3:2181 --topic ecplogs --from-beginning
+/opt/product/kafka/bin/kafka-console-consumer.sh --zookeeper zk1:2181,zk2:2181,zk3:2181 --topic test --from-beginning
+
+删除topic:
+
+/opt/product/kafka/bin/kafka-topics.sh --delete --zookeeper zk1:2181,zk2:2181,zk3:2181 --topic test
 
 ---zookeeper
 
