@@ -27,7 +27,7 @@ output {
 
     elasticsearch {
     hosts => "192.168.50.83:9200"
-    manage_template => false
+    manage_template => false  #不统计处理日志数据并出图
     index => "%{file_name}-%{+YYYY.MM.dd}"
   }
     file {
